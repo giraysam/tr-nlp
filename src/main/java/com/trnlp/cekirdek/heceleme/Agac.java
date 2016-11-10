@@ -17,8 +17,11 @@ public class Agac implements IAgac {
 
         for (int i = 0; i < kelimeUzunlugu; i++)
         {
-            if (mevcutDugum.baglantilar[harfler[i]-offset] == null)
-                mevcutDugum.baglantilar[harfler[i]-offset] = new AgacDugumu(harfler[i], (i == kelimeUzunlugu-1));
+            if (mevcutDugum.baglantilar[harfler[i] - offset] == null) {
+                mevcutDugum.baglantilar[harfler[i] - offset] = new AgacDugumu(harfler[i], (i == kelimeUzunlugu - 1));
+                System.out.println(i + "-" + harfler[i] + "-" + (harfler[i] - offset));
+            }
+
             mevcutDugum = mevcutDugum.baglantilar[harfler[i]-offset];
         }
     }
@@ -65,7 +68,7 @@ public class Agac implements IAgac {
             return false;
         }
 
-        if (mevcutDugum != null && !mevcutDugum.kelimeSonumu){
+        if (mevcutDugum != null && !mevcutDugum.kelimeSonumu) {
             return false;
         }
 

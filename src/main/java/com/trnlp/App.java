@@ -16,7 +16,7 @@ public class App {
         Agac agac = new Agac();
         AgacDugumu dugum = agac.agacOlustur();
 
-        String[] kelimeler = {"ablak", "ablaka", "abone", "abiye"};
+        String[] kelimeler = {"ablak", "ablaka", "abone", "abiye", "balon", "balerin"};
 
         int i = 0;
 
