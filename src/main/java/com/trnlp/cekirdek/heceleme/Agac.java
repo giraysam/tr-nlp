@@ -41,4 +41,32 @@ public class Agac implements IAgac {
             System.out.println();
         }
     }
+
+    public boolean ara(AgacDugumu dugum, String kelime) {
+
+        char[] harfler = kelime.toCharArray();
+        int kelimeUzunlugu = harfler.length;
+        int offset = 97;
+        AgacDugumu mevcutDugum = dugum;
+
+        int i;
+
+        for (i = 0; i < kelimeUzunlugu; i++)
+        {
+            if (mevcutDugum == null) {
+                return false;
+            }
+
+            mevcutDugum = mevcutDugum.baglantilar[harfler[i]-offset];
+        }
+
+        if (i == kelimeUzunlugu && mevcutDugum == null) {
+            return false;
+        }
+
+        if (mevcutDugum != null && !mevcutDugum.kelimeSonumu) {
+            return false;
+        }
+
+    }
 }
