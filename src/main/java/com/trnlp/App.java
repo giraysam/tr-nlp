@@ -1,9 +1,11 @@
 package com.trnlp;
 
-import com.trnlp.cekirdek.heceleme.Agac;
-import com.trnlp.cekirdek.heceleme.AgacDugumu;
+import com.trnlp.cekirdek.islemler.Agac;
+import com.trnlp.cekirdek.islemler.Dugum;
 import com.trnlp.cekirdek.heceleme.IHeceleyici;
 import com.trnlp.diller.tr.heceleme.Heceleyici;
+
+import java.util.List;
 
 public class App {
 
@@ -14,16 +16,23 @@ public class App {
         System.out.println(heceleyici.hecele("kelimeler"));
 
         Agac agac = new Agac();
-        AgacDugumu dugum = agac.agacOlustur();
+        Dugum kok = agac.agacOlustur();
 
-        String[] kelimeler = {"ablak", "ablaka", "abone", "abiye", "balon", "balerin"};
+        String[] kelimeler = {"bal", "balon", "balta", "balkon", "balerin", "ag", "agac"};
 
         int i = 0;
 
-        for (; i < kelimeler.length; i++)
-            agac.ekle(dugum, kelimeler[i]);
+        for (String kelime: kelimeler) {
+            agac.ekle(kok, kelime);
+        }
 
-        char[] dal = new char[50];
-        agac.yazdir(dugum, 0, dal);
+        List<String> bulunanKelimeler =  agac.ara(kok, "agaclik");
+
+        // System.out.println(bulunanKelimeler);
+
+        for (String kelime: bulunanKelimeler) {
+            System.out.println(kelime);
+        }
+
     }
 }
