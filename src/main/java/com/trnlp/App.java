@@ -30,7 +30,7 @@ public class App {
             agac.ekle(kok, kelime);
         }
 
-        List<String> bulunanKelimeler =  agac.ara(kok, "balıkçılar");
+        List<String> bulunanKelimeler =  agac.ara(kok, "Balıkçılar");
 
         if (bulunanKelimeler.size() > 1) {
             System.out.println("Bulunan Kökler:");

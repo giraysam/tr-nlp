@@ -14,7 +14,7 @@ public class Agac implements IAgac {
     public void ekle(Dugum dugum, String kelime) {
         int offset = 97;
         int kelimeUzunlugu = kelime.length();
-        char harfler[] = kelime.toCharArray();
+        char harfler[] = kelime.toLowerCase().toCharArray();
         Dugum mevcutDugum = dugum;
         int i = 0;
 
@@ -38,6 +38,7 @@ public class Agac implements IAgac {
     }
 
     public List<String> ara(Dugum dugum, String kelime) {
+        kelime = kelime.toLowerCase();
         int offset = 97;
         int kelimeUzunlugu = kelime.length();
         int i = 0;
