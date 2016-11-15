@@ -6,6 +6,13 @@ import java.util.List;
 
 public class Agac implements IAgac {
 
+    private static final char L_c = '\u00e7'; // ç
+    private static final char L_g = '\u011f'; // ğ
+    private static final char L_i = '\u0131'; // ı
+    private static final char L_o = '\u00f6'; // ö
+    private static final char L_s = '\u015f'; // ş
+    private static final char L_u = '\u00fc'; // ü
+
     public Dugum agacOlustur() {
 
         return new Dugum('\0', false);
@@ -45,6 +52,7 @@ public class Agac implements IAgac {
         Dugum mevcutDugum = dugum;
         StringBuilder harfler = new StringBuilder();
         List<String> bulunanKelimeler = new ArrayList<String>();
+        int asciiNum;
 
         if (dugum == null) {
             return bulunanKelimeler;
@@ -52,16 +60,18 @@ public class Agac implements IAgac {
 
         for(; i < kelimeUzunlugu; i++) {
 
-            if (mevcutDugum.altDugumler.length <= (kelime.charAt(i) - offset)) {
-                mevcutDugum.dugumGenislet((kelime.charAt(i) - offset));
+            asciiNum = kelime.codePointAt(i);
+
+            if (mevcutDugum.altDugumler.length <= (asciiNum - offset)) {
+                mevcutDugum.dugumGenislet((asciiNum - offset));
             }
 
-            if (mevcutDugum.altDugumler[kelime.charAt(i) - offset] == null) {
+            if (mevcutDugum.altDugumler[asciiNum - offset] == null) {
                 break;
             }
 
-            if (mevcutDugum.altDugumler[kelime.charAt(i) - offset].harf == kelime.charAt(i)) {
-                mevcutDugum = mevcutDugum.altDugumler[kelime.charAt(i) - offset];
+            if (mevcutDugum.altDugumler[asciiNum - offset].harf == asciiNum) {
+                mevcutDugum = mevcutDugum.altDugumler[asciiNum - offset];
 
                 harfler.append(mevcutDugum.harf);
 
