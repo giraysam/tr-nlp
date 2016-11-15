@@ -19,12 +19,21 @@ public class Agac implements IAgac {
         int i = 0;
 
         for (; i < kelimeUzunlugu; i++) {
+
+            if (mevcutDugum.altDugumler.length <= (harfler[i] - offset)) {
+                mevcutDugum.dugumGenislet((harfler[i] - offset));
+            }
+
             if (mevcutDugum.altDugumler[harfler[i] - offset] == null) {
                 mevcutDugum.altDugumler[harfler[i] - offset] = new Dugum(harfler[i], (i == kelimeUzunlugu - 1));
                 // System.out.println(i + "-" + harfler[i]);
-
             }
+
             mevcutDugum = mevcutDugum.altDugumler[harfler[i] - offset];
+
+            if (!mevcutDugum.kelimeSonumu) {
+                mevcutDugum.kelimeSonumu = (i == kelimeUzunlugu - 1);
+            }
         }
     }
 
@@ -33,19 +42,30 @@ public class Agac implements IAgac {
         int kelimeUzunlugu = kelime.length();
         int i = 0;
         Dugum mevcutDugum = dugum;
-        char[] harfler = new char[kelimeUzunlugu];
+        StringBuilder harfler = new StringBuilder();
         List<String> bulunanKelimeler = new ArrayList<String>();
+
+        if (dugum == null) {
+            return bulunanKelimeler;
+        }
 
         for(; i < kelimeUzunlugu; i++) {
 
-            if (mevcutDugum.altDugumler[kelime.charAt(i) - offset] != null) {
+            if (mevcutDugum.altDugumler.length <= (kelime.charAt(i) - offset)) {
+                mevcutDugum.dugumGenislet((kelime.charAt(i) - offset));
+            }
+
+            if (mevcutDugum.altDugumler[kelime.charAt(i) - offset] == null) {
+                break;
+            }
+
+            if (mevcutDugum.altDugumler[kelime.charAt(i) - offset].harf == kelime.charAt(i)) {
                 mevcutDugum = mevcutDugum.altDugumler[kelime.charAt(i) - offset];
 
-                harfler[i] = mevcutDugum.harf;
+                harfler.append(mevcutDugum.harf);
 
                 if (mevcutDugum.kelimeSonumu) {
-                    System.out.println();
-                    bulunanKelimeler.add(String.valueOf(harfler));
+                    bulunanKelimeler.add(harfler.toString());
                 }
             }
         }
